@@ -12,8 +12,7 @@
     width: 7vh;
     height: 7vh;
     font-size: 6vh;
-
-    /* border-radius: 0.5vw; */
+    transition: 0.5s ease-out;
 }
 
 .grid_1x1:hover {

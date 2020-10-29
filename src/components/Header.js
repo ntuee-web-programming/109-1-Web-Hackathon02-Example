@@ -19,7 +19,6 @@ export default function Header(props) {
 
     const handleChange = (event) => {
         setPreblem(event.target.value);
-        console.log(event.target.value)
         props.loadProblem(String(event.target.value));
     };
     const problemList = props.problemList.map(p => <MenuItem value={p}>{p}</MenuItem>)

@@ -1,0 +1,13 @@
+.grid_9x9 {
+    /* border: 2px solid; */
+}
+
+.grid_1x1 {
+    width: "5vw";
+    height: "5vw";
+}
+
+.grid_1x1:hover {
+    background-color: #777;
+    color: #fff;
+}

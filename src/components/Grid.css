@@ -11,7 +11,9 @@
     justify-content: center;
     width: 7vh;
     height: 7vh;
-    font-size: 6vh;
+    max-width: 8vw;
+    max-height: 8vw;
+    font-size: min(6vh, 6VW);
     transition: 0.5s ease-out;
 }
 

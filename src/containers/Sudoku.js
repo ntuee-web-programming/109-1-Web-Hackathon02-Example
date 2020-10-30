@@ -181,7 +181,7 @@ class Sudoku extends Component {
                 <Header problemList={problemList} loadProblem={this.loadProblem} gridValues={this.state.gridValues} problem={this.state.problem} updateState={this.updateState} />
                 {content}
                 {successAnimation}
-                {this.state.loading ? null : (<InputKeyBoard selectedGrid={this.state.selectedGrid} />)}
+                {this.state.loading ? null : (<InputKeyBoard selectedGrid={this.state.selectedGrid} hadleKeyDownEvent={this.hadleKeyDownEvent}/>)}
             </>
         );
     }

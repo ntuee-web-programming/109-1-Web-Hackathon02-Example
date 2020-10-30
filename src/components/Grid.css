@@ -2,11 +2,6 @@
     background-color: #999;
     /* border: 4px solid #666; */
 }
-.input-keyboard {
-    display: flex;
-    flex-direction: row;
-    margin: 5vh;
-}
 
 .grid_1x1 {
     background-color: #FFF;

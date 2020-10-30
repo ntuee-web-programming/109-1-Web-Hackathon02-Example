@@ -176,11 +176,11 @@ class Sudoku extends Component {
         }
         const successAnimation = this.state.completeFlag ? (<Fireworks {...fxProps} />) : null;
         return (
-            <div onKeyPress={this.handleKeyPress}>
+            <>
                 <Header problemList={problemList} loadProblem={this.loadProblem} updateState={this.updateState} />
                 {content}
                 {successAnimation}
-            </div>
+            </>
         );
     }
 }

@@ -5,12 +5,30 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
+    headerHolder: {
+        fontSize: "5vh",
+        margin: "3vh",
+        color: "#666"
+    },
+    title: {
+        fontSize: "6vh",
+    },
+    buttonHolder: {
+        display: "flex",
+        // width: "50vw",
+        justifyContent: "space-around"
+    },
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: 100,
     },
+    button: {
+        margin: theme.spacing(1),
+        maxWidth: "30vw",
+    }
 }));
 
 export default function Header(props) {
@@ -21,26 +39,42 @@ export default function Header(props) {
         setPreblem(event.target.value);
         props.loadProblem(String(event.target.value));
     };
+
+    const handleAutocomplete = () => {
+        // props.updateState()
+    }
+    const handleResetGame = () => {
+        // props.updateState()
+    }
+
     const problemList = props.problemList.map(p => <MenuItem value={p}>{p}</MenuItem>)
     return (
-        <div className="title" style={{ fontSize: "6vh", margin: "3vh", color: "#666" }}>
-            <div><b>My Sudoku</b></div>
-            <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">Problem</InputLabel>
-                <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={proplem}
-                    onChange={handleChange}
-                    label="Problem"
-                    autoWidth
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {problemList}
-                </Select>
-            </FormControl>
+        <div className={classes.headerHolder}>
+            <div className={classes.title}><b>My Sudoku</b></div>
+            <div className={classes.buttonHolder}>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Problem</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={proplem}
+                        onChange={handleChange}
+                        label="Problem"
+                        autoWidth
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        {problemList}
+                    </Select>
+                </FormControl>
+                <Button className={classes.button} onClick={handleAutocomplete} variant="contained" size="small">
+                    Auto Complete
+                </Button>
+                <Button className={classes.button} onClick={handleResetGame} variant="contained" size="small">
+                    Reset Game
+                </Button>
+            </div>
         </div>
 
     );

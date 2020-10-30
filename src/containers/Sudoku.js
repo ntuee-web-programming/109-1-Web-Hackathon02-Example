@@ -4,6 +4,7 @@ import { Fireworks } from 'fireworks/lib/react'
 
 import Header from '../components/Header';
 import Grid_9x9 from '../components/Grid_9x9';
+import InputKeyBoard from '../components/InputKeyBoard'
 import "./Sudoku.css"
 import { problemList } from "../problems"
 
@@ -167,7 +168,7 @@ class Sudoku extends Component {
             interval: 700,
             canvasWidth: window.innerWidth,
             canvasHeight: window.innerHeight,
-            colors: ['#cc3333', '#4CAF50', '#81C784'],
+            colors: ['#cc3333', '#81C784'],
             calc: (props, i) => ({
                 ...props,
                 x: (i + 1) * (window.innerWidth / 3) * Math.random(),
@@ -177,9 +178,10 @@ class Sudoku extends Component {
         const successAnimation = this.state.completeFlag ? (<Fireworks {...fxProps} />) : null;
         return (
             <>
-                <Header problemList={problemList} loadProblem={this.loadProblem} updateState={this.updateState} />
+                <Header problemList={problemList} loadProblem={this.loadProblem} gridValues={this.state.gridValues} problem={this.state.problem} updateState={this.updateState} />
                 {content}
                 {successAnimation}
+                {this.state.loading ? null : (<InputKeyBoard selectedGrid={this.state.selectedGrid} />)}
             </>
         );
     }

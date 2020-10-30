@@ -1,6 +1,11 @@
 .grid_9x9 {
     background-color: #999;
-    border: 4px solid #666;
+    /* border: 4px solid #666; */
+}
+.input-keyboard {
+    display: flex;
+    flex-direction: row;
+    margin: 5vh;
 }
 
 .grid_1x1 {
@@ -9,12 +14,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 7vh;
-    height: 7vh;
+    width: 6vh;
+    height: 6vh;
     max-width: 8vw;
     max-height: 8vw;
-    font-size: min(6vh, 6VW);
+    font-size: min(6vh, 6vw);
     transition: 0.5s ease-out;
+    color: #6CC;
 }
 
 .grid_1x1:hover {

@@ -7,8 +7,14 @@ class Grid_9x9 extends Component {
         super(props);
     }
     render() {
+        let gridStyle = {
+            borderLeft: this.props.offsetX === 0 ? "" : "4px solid #666",
+            borderRight: this.props.offsetX === 6 ? "" : "4px solid #666",
+            borderTop: this.props.offsetY === 0 ? "" : "4px solid #666",
+            borderBottom: this.props.offsetY === 6 ? "" : "4px solid #666",
+        };
         return (
-            <div className="grid_9x9">
+            <div className="grid_9x9" style={gridStyle}>
                 <div className="row">
                     <Grid_1x1 value={this.props.value[0]} fixed={this.props.fixedValue[0] !== "0"} posY={this.props.offsetY + 0} posX={this.props.offsetX + 0} handle_grid_1x1_click={this.props.handle_grid_1x1_click} selectedGrid={this.props.selectedGrid} conflicted={this.props.conflicts.find(c => c.posY === this.props.offsetY + 0 && c.posX === this.props.offsetX + 0) !== undefined} />
                     <Grid_1x1 value={this.props.value[1]} fixed={this.props.fixedValue[1] !== "0"} posY={this.props.offsetY + 0} posX={this.props.offsetX + 1} handle_grid_1x1_click={this.props.handle_grid_1x1_click} selectedGrid={this.props.selectedGrid} conflicted={this.props.conflicts.find(c => c.posY === this.props.offsetY + 0 && c.posX === this.props.offsetX + 1) !== undefined} />

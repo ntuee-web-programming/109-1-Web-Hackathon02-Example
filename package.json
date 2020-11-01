@@ -21,7 +21,7 @@
     "start": "react-scripts start",
     "start_server": "node server.js",
     "build": "react-scripts build",
-    "test": "npx cypress run --spec cypress/integration/examples/sample01test.spec.js",
+    "test": "npx cypress run --spec cypress/integration/sample01test.spec.js",
     "eject": "react-scripts eject",
     "cypress": "cypress open"
   },

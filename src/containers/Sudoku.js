@@ -4,7 +4,7 @@ import { Fireworks } from 'fireworks/lib/react'
 
 import Header from '../components/Header';
 import Grid_9x9 from '../components/Grid_9x9';
-import InputKeyBoard from '../components/InputKeyBoard'
+import ScreenInputKeyBoard from '../components/ScreenInputKeyBoard'
 import "./Sudoku.css"
 import { problemList } from "../problems"
 
@@ -15,105 +15,60 @@ class Sudoku extends Component {
             loading: true,
             problem: null,
             gridValues: null,
-            selectedGrid: { posY: -1, posX: -1 },
+            selectedGrid: { row_index: -1, col_index: -1 },
             gameBoardBoarderStyle: "8px solid #000",
             completeFlag: false,
-            conflicts: []
+            conflicts: [{ row_index: -1, col_index: -1 }]
         }
     }
 
-    componentDidMount = () => {
-        window.addEventListener('keydown', this.hadleKeyDownEvent);
-    }
-
-    loadProblem = async (name) => {
-        this.setState({
-            loading: true,
-            problem: null,
-            gridValues: null,
-            selectedGrid: { posY: -1, posX: -1 }
-        });
-
-        const problem = await require(`../problems/${name}`)
-        if (problem.content !== undefined) {
-            let gridValues = [];
-            for (let i = 0; i < problem.content.length; i++)
-                gridValues[i] = problem.content[i].slice();
-            this.setState({ problem: problem, gridValues: gridValues, loading: false });
-        }
-    }
-
-    extractArray(array, posX, posY) {
-        let rt = []
-        for (let i = posY; i < posY + 3; i++) {
-            for (let j = posX; j < posX + 3; j++) {
-                rt.push(array[i][j])
-            }
-        }
-        return rt;
-    }
-
-    handle_grid_1x1_click = (posY, posX) => {
-        if (this.state.problem.content[posY][posX] === "0") {
-            this.setState({ selectedGrid: { posY: posY, posX: posX } });
+    handle_grid_1x1_click = (row_index, col_index) => {
+        if (this.state.problem.content[row_index][col_index] === "0") {
+            this.setState({ selectedGrid: { row_index: row_index, col_index: col_index } });
         }
     }
 
     hadleKeyDownEvent = (e) => {
-        if (this.state.gridValues !== null && this.state.selectedGrid.posY !== -1 && this.state.selectedGrid.posX !== -1 && ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.code === "Space")) {
-            if (this.state.problem.content[this.state.selectedGrid.posY][this.state.selectedGrid.posX] === "0") {
-                if (this.isIputValid(this.state.selectedGrid.posY, this.state.selectedGrid.posX, e.key === " " ? "0" : e.key)) {
+        if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 && ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.code === "Space")) {
+            if (this.state.problem.content[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] === "0") {
+                if (this.isIputValid(this.state.selectedGrid.row_index, this.state.selectedGrid.col_index, e.key === " " ? "0" : e.key)) {
                     let newgridValues = this.state.gridValues;
-                    newgridValues[this.state.selectedGrid.posY][this.state.selectedGrid.posX] = e.key === " " ? "0" : e.key;
+                    newgridValues[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] = e.key === " " ? "0" : e.key;
                     this.setState({ gridValues: newgridValues });
                     this.checkCompleted(newgridValues);
                 } else {
-                    this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
-                    setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
+                    console.log("haha")
+                    // this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
+                    // setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
                 }
             }
         }
     }
 
-    isIputValid = (posY, posX, value) => {
-        // if (value === "0")
-        //     return true;
-        // for (let i = 0; i < 9; ++i) {
-        //     if (i !== posY && this.state.gridValues[i][posX] === value) {
-        //         return false
-        //     }
-        //     if (i !== posX && this.state.gridValues[posY][i] === value) {
-        //         return false
-        //     }
-        //     for (let j = 0; j < 9; ++j) {
-        //         const idx_row = Math.floor(posY / 3) * 3 + Math.floor(j / 3);
-        //         const idx_col = Math.floor(posX / 3) * 3 + j % 3;
-        //         if (idx_row !== posY && idx_col !== posX && this.state.gridValues[idx_row][idx_col] === value) {
-        //             return false
-        //         }
-        //     }
-        // }
-        // return true;
+    hadleScreenKeyboardInput = (num) => {
+        this.hadleKeyDownEvent({ key: String(num), keyCode: num + 48 });
+    }
 
+    isIputValid = (row_index, col_index, value) => {
         let rt = true;
         let conflicts = [];
         if (value === "0")
             return true;
         for (let i = 0; i < 9; ++i) {
-            if (i !== posY && this.state.gridValues[i][posX] === value) {
+            if (i !== row_index && this.state.gridValues[i][col_index] === value) {
                 rt = false;
-                conflicts.push({ posY: i, posX: posX });
+                conflicts.push({ row_index: i, col_index: col_index });
             }
-            if (i !== posX && this.state.gridValues[posY][i] === value) {
+            if (i !== col_index && this.state.gridValues[row_index][i] === value) {
                 rt = false;
-                conflicts.push({ posY: posY, posX: i });
+                conflicts.push({ row_index: row_index, col_index: i });
             }
             for (let j = 0; j < 9; ++j) {
-                const idx_row = Math.floor(posY / 3) * 3 + Math.floor(j / 3);
-                const idx_col = Math.floor(posX / 3) * 3 + j % 3;
-                if (idx_row !== posY && idx_col !== posX && this.state.gridValues[idx_row][idx_col] === value) {
+                const target_row_index = Math.floor(row_index / 3) * 3 + Math.floor(j / 3);
+                const target_col_index = Math.floor(col_index / 3) * 3 + j % 3;
+                if (target_row_index !== row_index && target_col_index !== col_index && this.state.gridValues[target_row_index][target_col_index] === value) {
                     rt = false;
-                    conflicts.push({ posY: idx_row, posX: idx_col });
+                    conflicts.push({ row_index: target_row_index, col_index: target_col_index });
                 }
             }
         }
@@ -138,31 +93,42 @@ class Sudoku extends Component {
         }
     }
 
+    componentDidMount = () => {
+        window.addEventListener('keydown', this.hadleKeyDownEvent);
+    }
+
+    loadProblem = async (name) => {
+        this.setState({
+            loading: true,
+            problem: null,
+            gridValues: null,
+            selectedGrid: { row_index: -1, col_index: -1 }
+        });
+
+        const problem = await require(`../problems/${name}`)
+        if (problem.content !== undefined) {
+            let gridValues = [];
+            for (let i = 0; i < problem.content.length; i++)
+                gridValues[i] = problem.content[i].slice();
+            this.setState({ problem: problem, gridValues: gridValues, loading: false });
+        }
+    }
+
+    extractArray(array, col_index, row_index) {
+        let rt = []
+        for (let i = row_index; i < row_index + 3; i++) {
+            for (let j = col_index; j < col_index + 3; j++) {
+                rt.push(array[i][j])
+            }
+        }
+        return rt;
+    }
+
     updateState = (object) => {
         this.setState(object);
     }
 
     render() {
-        const content = this.state.loading ? (<ReactLoading type={"bars"} color={"#777"} height={"40vh"} width={"40vh"} />) : (
-            <div className="gameBoard" style={{ border: this.state.gameBoardBoarderStyle }}>
-                <div className="row">
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 0)} fixedValue={this.extractArray(this.state.problem.content, 0, 0)} offsetY={0} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 0)} fixedValue={this.extractArray(this.state.problem.content, 3, 0)} offsetY={0} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 0)} fixedValue={this.extractArray(this.state.problem.content, 6, 0)} offsetY={0} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                </div>
-                <div className="row">
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 3)} fixedValue={this.extractArray(this.state.problem.content, 0, 3)} offsetY={3} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 3)} fixedValue={this.extractArray(this.state.problem.content, 3, 3)} offsetY={3} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 3)} fixedValue={this.extractArray(this.state.problem.content, 6, 3)} offsetY={3} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                </div>
-                <div className="row">
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 6)} fixedValue={this.extractArray(this.state.problem.content, 0, 6)} offsetY={6} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 6)} fixedValue={this.extractArray(this.state.problem.content, 3, 6)} offsetY={6} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                    <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 6)} fixedValue={this.extractArray(this.state.problem.content, 6, 6)} offsetY={6} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
-                </div>
-            </div>
-        );
-
         const fxProps = {
             count: 3,
             interval: 700,
@@ -175,13 +141,30 @@ class Sudoku extends Component {
                 y: window.innerHeight * Math.random()
             })
         }
-        const successAnimation = this.state.completeFlag ? (<Fireworks {...fxProps} />) : null;
         return (
             <>
                 <Header problemList={problemList} loadProblem={this.loadProblem} gridValues={this.state.gridValues} problem={this.state.problem} updateState={this.updateState} />
-                {content}
-                {successAnimation}
-                {this.state.loading ? null : (<InputKeyBoard selectedGrid={this.state.selectedGrid} hadleKeyDownEvent={this.hadleKeyDownEvent}/>)}
+                {this.state.loading ? (<ReactLoading type={"bars"} color={"#777"} height={"40vh"} width={"40vh"} />) : (
+                    <div className="gameBoard" style={{ border: this.state.gameBoardBoarderStyle }}>
+                        <div className="row">
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 0)} fixedValue={this.extractArray(this.state.problem.content, 0, 0)} offsetY={0} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 0)} fixedValue={this.extractArray(this.state.problem.content, 3, 0)} offsetY={0} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 0)} fixedValue={this.extractArray(this.state.problem.content, 6, 0)} offsetY={0} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                        </div>
+                        <div className="row">
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 3)} fixedValue={this.extractArray(this.state.problem.content, 0, 3)} offsetY={3} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 3)} fixedValue={this.extractArray(this.state.problem.content, 3, 3)} offsetY={3} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 3)} fixedValue={this.extractArray(this.state.problem.content, 6, 3)} offsetY={3} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                        </div>
+                        <div className="row">
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 6)} fixedValue={this.extractArray(this.state.problem.content, 0, 6)} offsetY={6} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 6)} fixedValue={this.extractArray(this.state.problem.content, 3, 6)} offsetY={6} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                            <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 6, 6)} fixedValue={this.extractArray(this.state.problem.content, 6, 6)} offsetY={6} offsetX={6} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
+                        </div>
+                    </div>
+                )}
+                {this.state.completeFlag ? (<Fireworks {...fxProps} />) : null}
+                {this.state.loading ? null : (<ScreenInputKeyBoard hadleScreenKeyboardInput={this.hadleScreenKeyboardInput} />)}
             </>
         );
     }

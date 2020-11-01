@@ -27,7 +27,7 @@ class Grid_1x1 extends Component {
             gridStyle = { ...gridStyle, backgroundColor: "#E77", color: "#FFF" };
         }
         return (
-            <div className="grid_1x1" id={`${this.props.posY}*${this.props.posX}`} style={gridStyle} onClick={() => this.props.handle_grid_1x1_click(this.props.posY, this.props.posX)}>
+            <div className="grid_1x1" id={`${this.props.posY}*${this.props.posX}`} tabindex="1" style={gridStyle} onClick={() => this.props.handle_grid_1x1_click(this.props.posY, this.props.posX)}>
                 { this.props.value === "0" ? "" : this.props.value}
             </div>
         );

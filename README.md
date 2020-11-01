@@ -1,23 +1,96 @@
-# 109-1-Web-Hackathon02-example
+# 109-1-Web-Hackathon02 - My Sudoku
+A simple sudoku game made with ReactJS. [(demo)]()
+![](https://i.imgur.com/nfCTHYt.png)
 
-## Implement Grid_1x1.js using eighter react component or react hook
-1. Grids showing correct value (30%)
-2. Grids with correct border (10%)
-3. Highlight selected grid (10%)
+## Getting Started
 
-## Implement input functions
-1. Complete hadleKeyDownEvent function, given keyboard event, update correcbonding value (20%)
-2. Complete input function using small keyboard below (10%)
+## Files Structure of the project
+The file structure is 
+![](https://i.imgur.com/bnG4QTc.png)
+![](https://i.imgur.com/LViqGD2.png)
 
-## Implement isIputValid function
-1. Given position (posY, posX) and given value (0~9), return true if the value is valid at that position (20%)
-
+## Requirements
+1. **Implement Grid_1x1.js using either react component or react hook (50% in total)**
+    * First, make sure you could **load the game correctly (30%)**
+        * This File Grid_1x1.js is empty now and you will get errors if you try to load the game
+        * You could decide to implement this file with either react component or react hook
+        * **Hint.** Make sure you have the following code in your Grid_1x1.js if you are using **react component**:
+        ```javascript=
+        const gridStyle = {
+            color: (this.props.selectedGrid.row_index === this.props.row_index && this.props.selectedGrid.col_index === this.props.col_index) || this.props.conflicted ? "#FFF" : this.props.fixed ? "#666" : "#6CC",
+            backgroundColor: this.props.selectedGrid.row_index === this.props.row_index && this.props.selectedGrid.col_index === this.props.col_index ? "#333" : this.props.conflicted ? "#E77" : "#FFF",
+        };
+        return (
+                <div className="grid_1x1" id={`grid-${this.props.row_index}*${this.props.col_index}`} style={gridStyle} onClick={() => this.props.handle_grid_1x1_click(this.props.row_index, this.props.col_index)}>
+                    { this.props.value === "0" ? "" : this.props.value}
+                </div>
+        );
+        ```
+        or this if you are using **react hook**:
+        ```javascript=
+        const gridStyle = {
+            color: (props.selectedGrid.row_index === props.row_index && props.selectedGrid.col_index === props.col_index) || props.conflicted ? "#FFF" : props.fixed ? "#666" : "#6CC",
+            backgroundColor: props.selectedGrid.row_index === props.row_index && props.selectedGrid.col_index === props.col_index ? "#333" : props.conflicted ? "#E77" : "#FFF",
+        };
+        return (
+                <div className="grid_1x1" id={`grid-${props.row_index}*${props.col_index}`} style={gridStyle} onClick={() => props.handle_grid_1x1_click(props.row_index, props.col_index)}>
+                    { props.value === "0" ? "" : props.value}
+                </div>
+        );
+        ```
+        If the Grid_1x1.js works, you should be able to  by selecting the menu. (Select test01.json to check)
+        ![](https://i.imgur.com/VGzwCvg.png)
+    
+    * Further, You should **apply proper style on different Grid_1x1s depending on their positions (10%)**. 
+        * The borders of each Grid_1x1 are different:
+        ![](https://i.imgur.com/ke41QEV.png)
+        * **Hint.** The position is given by the props.row_index and props.col_index
+        * You could refer to **Grid_9x9.js** for some information
+    * Finally, **make the empty grid selectable (10%)**
+        * When a grid_1x1 get clicked, its style should contain 
+        ```css=
+        backgroundColor: "#333", color: "#FFF"
+        ```
+        ![](https://i.imgur.com/eZ1d1DO.png)
+        * **Hint.** You should completed the function "handle_grid_1x1_click" in Sudoku.js, which should set the state properly:
+        ```json=
+        selectedGrid: { row_index: -1, col_index: -1}
+        ```
+        
+2. **Implement input functions (30% in total)**
+    * Firstly, **complete the key board inupt function (20%)**. 
+        * When user press the key (0~9), the currently selected grid should be update.
+        * **Hint.** You should complete **hadleKeyDownEvent** function in Sudoku.js. (Given keyboard event, update **gridValues** in state correspondingly)
+        * **Notice.** There are different keyCodes for number 0~9 (48~57 and 96~105). Make sure you handle them all.
+    * Secondarily, **complete the screen keyboard input function (10%)**
+        ![](https://i.imgur.com/PG66uzY.png)
+        * **Hint.** You should complete **hadleScreenKeyboardInput** function in Sudoku.js. (Given input number (0~9, Integer), update **gridValues** in state correspondingly)
+3. **Check If the input is valid (20% in total)**
+    * When user input a number (with keyboard or screen keyboard), you should **avoid the input if the input is not valid (20%)**
+        * **Hint.** Complete the **isIputValid** function in Sudoku.js and call the function in where it should
 
 ## Bonus
-1. Highlight conflicts positions (5%)
-2. Set Fireworks effect when the user win (1%)
+1. **Highlight conflicts grids (5%)**
+    ![](https://i.imgur.com/aRXdJt1.png) 
+    * When an invalid input is given, you should highlight the other conflicts grids
+    * **Hint.** You should set the **conflicts in state properly
+        
+2. **Add error effect to the game board boarder (2%)**
+    ![](https://i.imgur.com/8nvOT1K.png)
 
+    * **Hint.** You may use the following code:
+        ```javascript=
+        this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
+        setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
+        ```
+3. **Set off Firework effect when the user win (1%)**
+    * **Hint.** You may use the following code:
+        ```javascript=
+        this.setState({ completeFlag: true });
+        setTimeout(() => { this.setState({ completeFlag: false }); }, 2500);
+        ```
 ## Challenge
-1. Implement autocomplete function
-1. Implement reset game function
-2. 
+1. **Implement the AUTOCOMPLETE function**
+2. **Implement RESET GAME function**
+
+## Running Tests

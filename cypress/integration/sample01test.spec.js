@@ -106,8 +106,10 @@ describe('Hackathon 2 Test', () => {
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
 
-    cy.get('div[id="grid-4*4"]').click().type('9').should('have.css', 'background-color', 'rgb(51, 51, 51)')
-    cy.get('div[id="grid-4*4"]').click().type('3').should('have.css', 'background-color', 'rgb(51, 51, 51)')
+    cy.get('div[id="grid-4*4"]').click().type('9')
+    cy.get('div[id="grid-4*1"]').should('have.css', 'background-color', 'rgb(238, 119, 119)')
+    cy.get('div[id="grid-5*3"]').should('have.css', 'background-color', 'rgb(238, 119, 119)')
+    cy.get('div[id="grid-7*4"]').should('have.css', 'background-color', 'rgb(238, 119, 119)')
   })
 
   // 8th test
@@ -117,7 +119,8 @@ describe('Hackathon 2 Test', () => {
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
 
     cy.get('div[id="grid-4*4"]').click().type('9')
-    cy.get('div[id="game-board"]').should('have.css', 'background-color', 'rgb(51, 51, 51)')
+    cy.wait(300)
+    cy.get('div[id="game-board"]').should('have.css', 'border', '8px solid rgb(238, 119, 119)')
   })
 
   // 9th test

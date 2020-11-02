@@ -144,7 +144,7 @@ class Sudoku extends Component {
             <>
                 <Header problemList={problemList} loadProblem={this.loadProblem} gridValues={this.state.gridValues} problem={this.state.problem} updateState={this.updateState} />
                 {this.state.loading ? (<ReactLoading type={"bars"} color={"#777"} height={"40vh"} width={"40vh"} />) : (
-                    <div className="gameBoard" style={{ border: this.state.gameBoardBoarderStyle }}>
+                    <div id="game-board" className="gameBoard" style={{ border: this.state.gameBoardBoarderStyle }}>
                         <div className="row">
                             <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 0, 0)} fixedValue={this.extractArray(this.state.problem.content, 0, 0)} offsetY={0} offsetX={0} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />
                             <Grid_9x9 handle_grid_1x1_click={this.handle_grid_1x1_click} value={this.extractArray(this.state.gridValues, 3, 0)} fixedValue={this.extractArray(this.state.problem.content, 3, 0)} offsetY={0} offsetX={3} selectedGrid={this.state.selectedGrid} conflicts={this.state.conflicts} />

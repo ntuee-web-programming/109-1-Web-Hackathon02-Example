@@ -1,6 +1,6 @@
 describe('Hackathon 2 Test', () => {
   // 1st test
-  it('Show correct Grid_1x1 value', () => {
+  it('[Grid_9x9] Load the game correctly (30%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -17,7 +17,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 2nd test
-  it('Correct Grid_1x1 border', () => {
+  it('[Grid_9x9] Grid_1x1 border (10%)', () => {
       cy.visit('/')
       cy.get('#demo-simple-select-outlined').click()
       cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -54,7 +54,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 3rd test
-  it('Show black background color after clicking Grid_1x1', () => {
+  it('[Grid_9x9] Make the empty grid selectable (10%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -65,7 +65,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 4th test
-  it('Show correct keyboard input', () => {
+  it('[Input Functions] Complete the key board inupt function (20%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -75,7 +75,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 5th test
-  it('Show correct small keyboard input', () => {
+  it('[Input Functions] Complete the screen keyboard input function (10%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -90,7 +90,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 6th test
-  it('Check function isInputValid', () => {
+  it('Check If the input is valid (20%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -101,7 +101,7 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 7th test
-  it('Check conflict highlight', () => {
+  it('Highlight conflicts grids (5%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
@@ -111,17 +111,17 @@ describe('Hackathon 2 Test', () => {
   })
 
   // 8th test
-  it('Check conflict highlight of outside container', () => {
+  it('Add error effect to the game board boarder (3%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()
 
     cy.get('div[id="grid-4*4"]').click().type('9')
-    cy.get('div[id=""]').should('have.css', 'background-color', 'rgb(51, 51, 51)')
+    cy.get('div[id="game-board"]').should('have.css', 'background-color', 'rgb(51, 51, 51)')
   })
 
   // 9th test
-  it('Check fireworks', () => {
+  it('Set off Firework effect when the user win (2%)', () => {
     cy.visit('/')
     cy.get('#demo-simple-select-outlined').click()
     cy.get('.MuiMenuItem-root').contains('sample01.json').click()

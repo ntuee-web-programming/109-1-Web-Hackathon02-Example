@@ -37,9 +37,8 @@ class Sudoku extends Component {
                     this.setState({ gridValues: newgridValues });
                     this.checkCompleted(newgridValues);
                 } else {
-                    console.log("haha")
-                    // this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
-                    // setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
+                    this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
+                    setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
                 }
             }
         }

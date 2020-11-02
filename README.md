@@ -90,7 +90,8 @@ A simple sudoku game made with ReactJS. [[demo video]]()
     
     * Further, You should **apply proper style on different Grid_1x1s depending on their positions (10%)**
         * The borders of each Grid_1x1 are different:
-        ![](https://i.imgur.com/ke41QEV.png)
+        ![](https://i.imgur.com/2BL0ehS.png)
+
         * **Hint.** The position is given by the **props.row_index** and **props.col_index**
         * You could refer to **Grid_9x9.js** for some information
     * Finally, **make the empty grid selectable (10%)**

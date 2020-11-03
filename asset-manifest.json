@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/109-1-Web-Hackathon02-Example/static/css/main.aa1f5680.chunk.css",
+    "main.js": "/109-1-Web-Hackathon02-Example/static/js/main.2c955ede.chunk.js",
+    "main.js.map": "/109-1-Web-Hackathon02-Example/static/js/main.2c955ede.chunk.js.map",
+    "runtime-main.js": "/109-1-Web-Hackathon02-Example/static/js/runtime-main.e53f2487.js",
+    "runtime-main.js.map": "/109-1-Web-Hackathon02-Example/static/js/runtime-main.e53f2487.js.map",
+    "static/js/2.200a9eb5.chunk.js": "/109-1-Web-Hackathon02-Example/static/js/2.200a9eb5.chunk.js",
+    "static/js/2.200a9eb5.chunk.js.map": "/109-1-Web-Hackathon02-Example/static/js/2.200a9eb5.chunk.js.map",
+    "static/js/3.c617f1d6.chunk.js": "/109-1-Web-Hackathon02-Example/static/js/3.c617f1d6.chunk.js",
+    "static/js/3.c617f1d6.chunk.js.map": "/109-1-Web-Hackathon02-Example/static/js/3.c617f1d6.chunk.js.map",
+    "index.html": "/109-1-Web-Hackathon02-Example/index.html",
+    "static/css/main.aa1f5680.chunk.css.map": "/109-1-Web-Hackathon02-Example/static/css/main.aa1f5680.chunk.css.map",
+    "static/js/2.200a9eb5.chunk.js.LICENSE.txt": "/109-1-Web-Hackathon02-Example/static/js/2.200a9eb5.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/109-1-Web-Hackathon02-Example/static/media/logo.103b5fa1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e53f2487.js",
+    "static/js/2.200a9eb5.chunk.js",
+    "static/css/main.aa1f5680.chunk.css",
+    "static/js/main.2c955ede.chunk.js"
+  ]
+}

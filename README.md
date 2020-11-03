@@ -1,5 +1,5 @@
 # 109-1-Web-Hackathon02 - My Sudoku
-A simple sudoku game made with ReactJS. 
+A simple sudoku game made with ReactJS.
 
 🚀 [deploy](https://ntuee-webprogramming.github.io/109-1-Web-Hackathon02-Example/)
 
@@ -114,26 +114,26 @@ A simple sudoku game made with ReactJS.
     * Firstly, **complete the key board inupt function (20%)**
         * When user press the key (0~9), the currently selected grid should be update.
         * **Hint.** You should complete **hadleKeyDownEvent** function in Sudoku.js. (Given keyboard event, update **gridValues** in state correspondingly)
-        * **Notice.** There are different keyCodes for number 0~9 (48~57 and 96~105). Make sure you handle them all.
+        * **Notice.** There are different keyCodes for number 0-9 (48-57 and 96-105). Make sure you handle them all.
     * Secondarily, **complete the screen keyboard input function (10%)**
         ![](https://i.imgur.com/J99Qqdp.png)
         * **Hint.** You should complete **hadleScreenKeyboardInput** function in Sudoku.js. (Given input number (0~9, Integer), update **gridValues** in state correspondingly)
 3. **Check If the input is valid (20% in total)**
-    * When user input a number (with keyboard or screen keyboard), you should **avoid the input if the input is not valid (20%)**
+    * When user input a number (with keyboard or screen keyboard), you should **avoid the input if the input is not valid (20%)** see [數獨規則]( http://letmegooglethat.com/?q=%E6%95%B8%E7%8D%A8%E8%A6%8F%E5%89%87) for more information
 
 ## Bonus
 1. **Highlight conflicts grids (5%)**
     ![](https://i.imgur.com/aRXdJt1.png) 
-    * When an invalid input is given, you should highlight the other conflicts grids
-    * **Hint.** You should set the **conflicts in state properly
+    * When an invalid input is given, you should highlight the other conflicts grids for one secend
+    * **Hint.** You should set the **conflicts in state properly**
         
 2. **Add error effect to the game board boarder (3%)**
     ![](https://i.imgur.com/8nvOT1K.png)
-    * When an invalid input is given, you should make the border style of the gameboard (id="game-board") to `"8px solid #E77"` for 1 minute
+    * When an invalid input is given, you should make the border style of the gameboard (id="game-board") to `"8px solid #E77"` for 1 second
     * **Hint.** You may use the following code:
         ```javascript=
-        this.setState({ gameBoardBoarderStyle: "8px solid #E77" });
-        setTimeout(() => { this.setState({ gameBoardBoarderStyle: "8px solid #333" }); }, 1000);
+        this.setState({ gameBoardBorderStyle: "8px solid #E77" });
+        setTimeout(() => { this.setState({ gameBordBoarderStyle: "8px solid #333" }); }, 1000);
         ```
 3. **Set off Firework effect when the user win (2%)**
     * **Hint.** You may use the following code:

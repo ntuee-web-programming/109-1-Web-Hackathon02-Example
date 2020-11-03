@@ -32,19 +32,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
     const classes = useStyles();
-    const [proplem, setPreblem] = React.useState('');
+    const [problem, setPreblem] = React.useState('');
 
     const handleChange = (event) => {
         setPreblem(event.target.value);
         props.loadProblem(String(event.target.value));
     };
-
-    const handleAutocomplete = () => {
-        // props.updateState()
-    }
-    const handleResetGame = () => {
-        // props.updateState()
-    }
 
     const problemList = props.problemList.map(p => <MenuItem value={p}>{p}</MenuItem>)
     return (
@@ -56,7 +49,7 @@ export default function Header(props) {
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        value={proplem}
+                        value={problem}
                         onChange={handleChange}
                         label="problem"
                         autoWidth
@@ -67,10 +60,10 @@ export default function Header(props) {
                         {problemList}
                     </Select>
                 </FormControl>
-                <Button className={classes.button} onClick={handleAutocomplete} variant="contained" size="small">
+                <Button className={classes.button} variant="contained" size="small" onClick={props.handleAutoComplete}>
                     Auto Complete
                 </Button>
-                <Button className={classes.button} onClick={handleResetGame} variant="contained" size="small">
+                <Button className={classes.button} variant="contained" size="small" onClick={props.handleResetGame}>
                     Reset Game
                 </Button>
             </div>

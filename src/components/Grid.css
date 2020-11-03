@@ -15,7 +15,6 @@
     max-height: 8vw;
     font-size: min(6vh, 6vw);
     transition: 0.5s ease-out;
-    /* color: #6CC; */
 }
 
 .grid_1x1:hover {

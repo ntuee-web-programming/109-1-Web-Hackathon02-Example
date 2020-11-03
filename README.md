@@ -1,5 +1,5 @@
 # 109-1-Web-Hackathon02 - My Sudoku
-A simple sudoku game made with ReactJS. [[demo video]]()
+A simple sudoku game made with ReactJS. [[demo video]](https://youtu.be/Y-CJbfves4Y)
 ![](https://i.imgur.com/nfCTHYt.png)
 
 ## Getting Started (Before class)
@@ -115,7 +115,6 @@ A simple sudoku game made with ReactJS. [[demo video]]()
         * **Hint.** You should complete **hadleScreenKeyboardInput** function in Sudoku.js. (Given input number (0~9, Integer), update **gridValues** in state correspondingly)
 3. **Check If the input is valid (20% in total)**
     * When user input a number (with keyboard or screen keyboard), you should **avoid the input if the input is not valid (20%)**
-        * **Hint.** Complete the **isIputValid** function in Sudoku.js and call the function in where it should
 
 ## Bonus
 1. **Highlight conflicts grids (5%)**
@@ -125,7 +124,7 @@ A simple sudoku game made with ReactJS. [[demo video]]()
         
 2. **Add error effect to the game board boarder (3%)**
     ![](https://i.imgur.com/8nvOT1K.png)
-
+    * When an invalid input is given, you should make the border style of the gameboard (id="game-board") to `"8px solid #E77"` for 1 minute
     * **Hint.** You may use the following code:
         ```javascript=
         this.setState({ gameBoardBoarderStyle: "8px solid #E77" });

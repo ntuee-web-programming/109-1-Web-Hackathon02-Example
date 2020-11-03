@@ -7,3 +7,15 @@
   align-items: center;
   justify-content: center;
 }
+
+*:focus {
+  outline: none;
+}
+
+div {
+  user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
